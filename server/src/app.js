@@ -18,6 +18,14 @@ app.use(express.static("public"))
 app.use(cookieParser())
 
 
+
+//farmer routing
+import farmerRoutes from "./routes/farmer.routes.js"; // Import the new routes
+
+app.use("/api/farmers", farmerRoutes); // Register the route
+
+
+
 // routing
 
 import userRouter from "./routes/auth.routes.js"
