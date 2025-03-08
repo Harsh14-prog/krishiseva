@@ -9,6 +9,7 @@ import Exporter from "../components/Exporter";
 import FarmerOnboarding from "../pages/FarmerOnboarding";
 import ContractFarming from "../components/ContractFarming";
 import ProtectedRoute from "../auth/ProtectedRoutes"; // ✅ Import Protected Route
+import CreateRoom from "../pages/CreateRoom"; // ✅ Import CreateRoom component
 
 const router = createBrowserRouter([
   { path: "/", element: <Home /> },
@@ -36,7 +37,10 @@ const router = createBrowserRouter([
   {
     path: "/mentor-dashboard",
     element: <ProtectedRoute allowedRole="mentor" />,
-    children: [{ index: true, element: <Mentor /> }],
+    children: [
+      { index: true, element: <Mentor /> }, // ✅ Mentor Dashboard
+      { path: "create-room", element: <CreateRoom /> }, // ✅ Create Room Page
+    ],
   },
 
   // ✅ Exporter Dashboard
