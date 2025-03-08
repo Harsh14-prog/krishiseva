@@ -23,7 +23,12 @@ const FarmerOnboarding = () => {
     // ✅ Handle Profile Submission
     const onSubmit = async (data) => {
         try {
-            await axios.post("http://localhost:8080/api/farmers/create-profile", data, {
+            const profileData = {
+                ...data,
+                profileCompleted: true, // ✅ Added this field to mark profile as complete
+            };
+
+            await axios.post("/api/farmers/create-profile", profileData, {
                 headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
             });
 

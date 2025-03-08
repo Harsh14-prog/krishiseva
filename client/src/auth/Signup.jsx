@@ -39,7 +39,7 @@ const onSubmit = async (data) => {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="h-screen flex justify-center items-center bg-gray-100">
-            <div className="w-[30%] min-h-[60%] bg-white p-6 shadow-lg rounded-lg">
+            <div className="w-1/4 h-auto bg-white p-16 shadow-lg rounded-xl">
                 <h1 className="text-2xl font-bold text-gray-800 mb-4 text-center">Signup</h1>
 
                 <input {...register("name")} type="text" placeholder="Name" className="w-full border border-gray-300 p-3 rounded-md mb-3 focus:ring-2 focus:ring-emerald-500" />

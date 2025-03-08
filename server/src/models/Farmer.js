@@ -7,7 +7,8 @@ const FarmerSchema = new mongoose.Schema({
     aadhaar: { type: String, required: true },
     dob: { type: Date, required: false },
     gender: { type: String, enum: ["Male", "Female", "Other"], required: true },
-    language: { type: String, enum: ["Hindi", "Marathi", "English"], required: true }
+    language: { type: String, enum: ["Hindi", "Marathi", "English"], required: true },
+    profileCompleted: { type: Boolean, default: false },
 });
 
 const Farmer = mongoose.model("Farmer", FarmerSchema);

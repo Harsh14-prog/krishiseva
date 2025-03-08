@@ -1,41 +1,43 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate, Outlet } from "react-router-dom";
+import DashboardNavbar from "../Navbar/DashboardNavbar";
 
 const Farmer = () => {
     const navigate = useNavigate();
-    const [loading, setLoading] = useState(false);
-    const [profileComplete, setProfileComplete] = useState(null); // Assume profile is complete
 
     const handleNavigation = () => {
-        if (profileComplete === null) return;
-
-        setLoading(true);
-
-        if (profileComplete) {
-            navigate("contract-farming"); // ✅ Use Relative Path
-        } else {
-            navigate("/farmer-onboarding"); // ❌ Redirect to Profile Completion if Incomplete
-        }
-
-        setLoading(false);
+        navigate("/contract-farming"); // ✅ Direct navigation
     };
 
-    return (
-        <div className="h-screen flex flex-col items-center justify-center bg-gray-100">
+    const handleLogout = () => {
+        localStorage.removeItem("user"); // ✅ Clear user data
+        navigate("/login"); // ✅ Redirect to login page
+    };
+
+    return (<>
+        <DashboardNavbar role="farmer" />
+        <div className="h-screen flex flex-col items-center justify-center bg-white">
             <h1 className="text-3xl font-bold text-gray-800 mb-6">Farmer Dashboard</h1>
 
             <div className="grid grid-cols-2 gap-4">
                 <button
                     onClick={handleNavigation}
-                    className="bg-green-600 text-white px-6 py-3 rounded-md hover:bg-green-700"
-                    disabled={loading || profileComplete === null}
+                    className="bg-green-600 text-white px-6 py-3 rounded-md hover:bg-green-700 transition duration-200"
                 >
-                    {loading ? "Checking..." : "Join Contract Farming"}
+                    Join Contract Farming
+                </button>
+
+                <button
+                    onClick={handleLogout}
+                    className="bg-red-600 text-white px-6 py-3 rounded-md hover:bg-red-700 transition duration-200"
+                >
+                    Logout
                 </button>
             </div>
 
-            <Outlet /> {/* ✅ Allows nested components (like Contract Farming) to render here */}
+            <Outlet />
         </div>
+        </>
     );
 };
 

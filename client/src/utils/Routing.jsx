@@ -8,29 +8,47 @@ import Mentor from "../components/Mentor";
 import Exporter from "../components/Exporter";
 import FarmerOnboarding from "../pages/FarmerOnboarding";
 import ContractFarming from "../components/ContractFarming";
+import ProtectedRoute from "../auth/ProtectedRoutes"; // ✅ Import Protected Route
 
 const router = createBrowserRouter([
-    { path: "/", element: <Home /> },
-    { path: "/signup", element: <Signup /> },
-    { path: "/login", element: <Login /> },
+  { path: "/", element: <Home /> },
+  { path: "/signup", element: <Signup /> },
+  { path: "/login", element: <Login /> },
 
-    // ✅ Farmer Dashboard with Nested Routes
-    {
-        path: "/farmer-dashboard",
-        element: <Farmer />, // ✅ Farmer Page as Layout
-        children: [
-            { path: "contract-farming", element: <ContractFarming /> }, // ✅ Relative Path for Nested Route
-        ],
-    },
+  // ✅ Farmer Dashboard (Parent Route)
+  {
+    path: "/farmer-dashboard",
+    element: <ProtectedRoute allowedRole="farmer" />, // ✅ Correct usage
+    children: [
+      { index: true, element: <Farmer /> }, // ✅ Default dashboard view
+      { path: "farmer-onboarding", element: <FarmerOnboarding /> }, // ✅ Nested route
+    ],
+  },
 
-    { path: "/farmer-onboarding", element: <FarmerOnboarding /> },
+  // ✅ Contract Farming (Separate Dashboard)
+  {
+    path: "/contract-farming",
+    element: <ProtectedRoute allowedRole="farmer" />,
+    children: [{ index: true, element: <ContractFarming /> }],
+  },
 
-    { path: "/mentor-dashboard", element: <Mentor /> },
-    { path: "/exporter-dashboard", element: <Exporter /> },
+  // ✅ Mentor Dashboard
+  {
+    path: "/mentor-dashboard",
+    element: <ProtectedRoute allowedRole="mentor" />,
+    children: [{ index: true, element: <Mentor /> }],
+  },
+
+  // ✅ Exporter Dashboard
+  {
+    path: "/exporter-dashboard",
+    element: <ProtectedRoute allowedRole="exporter" />,
+    children: [{ index: true, element: <Exporter /> }],
+  },
 ]);
 
 const Routing = () => {
-    return <RouterProvider router={router} />;
+  return <RouterProvider router={router} />;
 };
 
 export default Routing;

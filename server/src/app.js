@@ -3,6 +3,7 @@ import express from "express"
 import cors from "cors"
 import cookieParser from "cookie-parser"
 
+
 const app = express()
 
 app.use(cors({
@@ -20,9 +21,9 @@ app.use(cookieParser())
 
 
 //farmer routing
-import farmerRoutes from "./routes/farmer.routes.js"; // Import the new routes
+import farmerRoutes from "./routes/farmer.routes.js";
 
-app.use("/api/farmers", farmerRoutes); // Register the route
+app.use("/api/farmer", farmerRoutes); // Register the route
 
 
 
