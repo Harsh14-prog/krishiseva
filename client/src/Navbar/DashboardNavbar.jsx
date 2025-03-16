@@ -5,6 +5,14 @@ import AddBoxIcon from "@mui/icons-material/AddBox";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import PersonIcon from "@mui/icons-material/Person";
 import LogoutIcon from "@mui/icons-material/Logout";
+import MenuBookIcon from "@mui/icons-material/MenuBook";
+import MeetingRoomIcon from "@mui/icons-material/MeetingRoom";
+import EventIcon from "@mui/icons-material/Event";
+import ContactMailIcon from "@mui/icons-material/ContactMail";
+import TrackChangesIcon from "@mui/icons-material/TrackChanges";
+import NotificationsIcon from "@mui/icons-material/Notifications";
+import SettingsIcon from "@mui/icons-material/Settings";
+import { ChevronLeft, ChevronRight } from "@mui/icons-material";
 
 const DashboardNavbar = ({ role }) => {
   const [isOpen, setIsOpen] = useState(true);
@@ -23,7 +31,7 @@ const DashboardNavbar = ({ role }) => {
   const menuItems = {
     farmer: [
       { path: "/farmer-dashboard", label: "Home", icon: <HomeIcon /> },
-      { path: "/farmer-onboarding", label: "Onboarding", icon: <AddBoxIcon /> },
+      { path: "/farmer-dashboard/farmer-onboarding", label: "Onboarding", icon: <AddBoxIcon /> },
       { path: "/contract-farming", label: "Contract Farming", icon: <PeopleAltIcon /> },
       { path: "/farmer-profile", label: "Profile", icon: <PersonIcon /> },
     ],
@@ -35,13 +43,26 @@ const DashboardNavbar = ({ role }) => {
       { path: "/exporter-dashboard", label: "Home", icon: <HomeIcon /> },
       { path: "/exporter-profile", label: "Profile", icon: <PersonIcon /> },
     ],
-    
+
+    contractFarming: [
+      { path: "/contract-farming/explore-mentor-plans", label: "Explore Mentor Plans", icon: <MenuBookIcon /> },
+      { path: "/joined-rooms", label: "Joined Rooms", icon: <MeetingRoomIcon /> },
+      { path: "/my-meetings", label: "My Meetings", icon: <EventIcon /> },
+      { path: "/meeting-calendar", label: "Meeting Calendar", icon: <EventIcon /> }, // New
+      { path: "/meeting-history", label: "Meeting History", icon: <MenuBookIcon /> }, // New
+      { path: "/request-mentor", label: "Request a Mentor", icon: <ContactMailIcon /> },
+      { path: "/progress-tracker", label: "Progress Tracker", icon: <TrackChangesIcon /> },
+      { path: "/set-reminders", label: "Set Reminders", icon: <NotificationsIcon /> }, // New
+      { path: "/notifications", label: "Notifications & Alerts", icon: <NotificationsIcon /> },
+      { path: "/settings", label: "Settings", icon: <SettingsIcon /> },
+    ]
+
   };
 
   return (
     <div className="flex h-screen fixed">
       {/* Sidebar */}
-      <div className={`bg-gray-100 h-full transition-all duration-300 ${isOpen ? "w-64" : "w-18"}`}>
+      <div className={`bg-gray-100 h-full transition-all duration-300 ${isOpen ? "w-64" : "w-16"}`}>
         <div className="flex justify-between items-center p-4 border-b">
           {isOpen && <h1 className="text-3xl text-green-600 font-bold">KrishiSeva</h1>}
           <button className="text-3xl font-extrabold" onClick={() => setIsOpen(!isOpen)}>

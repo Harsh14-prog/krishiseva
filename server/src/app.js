@@ -22,15 +22,15 @@ app.use(cookieParser())
 
 //farmer routing
 import farmerRoutes from "./routes/farmer.routes.js";
-
 app.use("/api/farmer", farmerRoutes); // Register the route
 
-
-
-// routing
+// authentication routing
 
 import userRouter from "./routes/auth.routes.js"
-
 app.use("/api/auth" , userRouter)
+
+// room routes
+import roomRoutes from "./routes/room.routes.js"
+app.use("/api/room" ,roomRoutes )
 
 export {app}

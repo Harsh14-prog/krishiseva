@@ -1,9 +1,12 @@
 import React from 'react'
+import DashboardNavbar from '../Navbar/DashboardNavbar'
 
 const ContractFarming = () => {
   return (
     <div>
-      <h1 className='flex justify-center items-center '>Contract here</h1>
+      <h1 className=''>
+        <DashboardNavbar role = "contractFarming"/>
+      </h1>
     </div>
   )
 }

@@ -10,6 +10,8 @@ import FarmerOnboarding from "../pages/FarmerOnboarding";
 import ContractFarming from "../components/ContractFarming";
 import ProtectedRoute from "../auth/ProtectedRoutes"; // ✅ Import Protected Route
 import CreateRoom from "../pages/CreateRoom"; // ✅ Import CreateRoom component
+import ExploreMentorPlans from "../Template/ExploreMentorPlans";
+
 
 const router = createBrowserRouter([
   { path: "/", element: <Home /> },
@@ -29,8 +31,20 @@ const router = createBrowserRouter([
   // ✅ Contract Farming (Separate Dashboard)
   {
     path: "/contract-farming",
-    element: <ProtectedRoute allowedRole="farmer" />,
-    children: [{ index: true, element: <ContractFarming /> }],
+    element: <ProtectedRoute allowedRole="farmer"/>,
+    children: [
+      { index: true, element: <ContractFarming /> },
+      { path: "explore-mentor-plans", element: <ExploreMentorPlans/> },
+      // { path: "joined-rooms", element: <JoinedRooms /> },
+      // { path: "my-meetings", element: <MyMeetings /> },
+      // { path: "meeting-calendar", element: <MeetingCalendar /> },
+      // { path: "meeting-history", element: <MeetingHistory /> },
+      // { path: "request-mentor", element: <RequestMentor /> },
+      // { path: "progress-tracker", element: <ProgressTracker /> },
+      // { path: "set-reminders", element: <SetReminders /> },
+      // { path: "notifications", element: <Notifications /> },
+      // { path: "settings", element: <Settings /> },
+    ],
   },
 
   // ✅ Mentor Dashboard
