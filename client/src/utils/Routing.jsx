@@ -21,7 +21,7 @@ const router = createBrowserRouter([
   // ✅ Farmer Dashboard (Parent Route)
   {
     path: "/farmer-dashboard",
-    element: <ProtectedRoute allowedRole="farmer" />, // ✅ Correct usage
+    element: <ProtectedRoute allowedRole="farmer" navbarRole="farmer"/>, // ✅ Correct usage
     children: [
       { index: true, element: <Farmer /> }, // ✅ Default dashboard view
       { path: "farmer-onboarding", element: <FarmerOnboarding /> }, // ✅ Nested route
@@ -31,7 +31,7 @@ const router = createBrowserRouter([
   // ✅ Contract Farming (Separate Dashboard)
   {
     path: "/contract-farming",
-    element: <ProtectedRoute allowedRole="farmer"/>,
+    element: <ProtectedRoute allowedRole="farmer" navbarRole="contractFarming"/>,
     children: [
       { index: true, element: <ContractFarming /> },
       { path: "explore-mentor-plans", element: <ExploreMentorPlans/> },
@@ -50,7 +50,7 @@ const router = createBrowserRouter([
   // ✅ Mentor Dashboard
   {
     path: "/mentor-dashboard",
-    element: <ProtectedRoute allowedRole="mentor" />,
+    element: <ProtectedRoute allowedRole="mentor" navbarRole="mentor" />,
     children: [
       { index: true, element: <Mentor /> }, // ✅ Mentor Dashboard
       { path: "create-room", element: <CreateRoom /> }, // ✅ Create Room Page
@@ -60,7 +60,7 @@ const router = createBrowserRouter([
   // ✅ Exporter Dashboard
   {
     path: "/exporter-dashboard",
-    element: <ProtectedRoute allowedRole="exporter" />,
+    element: <ProtectedRoute allowedRole="exporter"  navbarRole="exporter"/>,
     children: [{ index: true, element: <Exporter /> }],
   },
 ]);

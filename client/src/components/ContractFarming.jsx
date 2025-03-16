@@ -5,7 +5,7 @@ const ContractFarming = () => {
   return (
     <div>
       <h1 className=''>
-        <DashboardNavbar role = "contractFarming"/>
+        Contract Farming
       </h1>
     </div>
   )

@@ -15,7 +15,7 @@ const Farmer = () => {
     };
 
     return (<>
-        <DashboardNavbar role="farmer" />
+        
         <div className="h-screen flex flex-col items-center justify-center bg-white">
             <h1 className="text-3xl font-bold text-gray-800 mb-6">Farmer Dashboard</h1>
 
