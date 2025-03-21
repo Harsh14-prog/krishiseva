@@ -4,7 +4,7 @@ import Routing from './utils/Routing'
 
 const App = () => {
   return (
-    <div className='h-screen w-full bg-zinc-300'>
+    <div className='h-screen w-full overflow-x-hidden'>
       <Routing/>
     </div>
   )

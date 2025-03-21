@@ -1,14 +1,15 @@
-import React from 'react'
-import DashboardNavbar from '../Navbar/DashboardNavbar'
+import DashboardNavbar from "../Navbar/DashboardNavbar";
+import React from "react";
 
-const ContractFarming = () => {
+
+const ContractFarmingPage = () => {
   return (
-    <div>
-      <h1 className=''>
-        Contract Farming
-      </h1>
+    <div className="h-screen w-screen flex justify-center items-center flex-col">
+       <h1 className="text-2xl font-bold">Welcome to Contract Farming</h1>
+       <p>Here is your contract farming content...</p>
     </div>
-  )
-}
+  );
+};
 
-export default ContractFarming
+
+export default ContractFarmingPage;

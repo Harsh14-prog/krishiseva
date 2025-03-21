@@ -40,7 +40,7 @@ const FarmerOnboarding = () => {
     };
 
     return (
-        <div className="h-screen flex justify-center items-center bg-gray-100">
+        <div className="h-screen w-screen flex justify-center items-center bg-gray-100">
             <form onSubmit={handleSubmit(onSubmit)} className="w-[35%] bg-white p-6 shadow-lg rounded-lg">
                 <h2 className="text-2xl font-bold text-gray-800 text-center mb-4">Complete Your Profile</h2>
 

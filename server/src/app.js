@@ -25,7 +25,6 @@ import farmerRoutes from "./routes/farmer.routes.js";
 app.use("/api/farmer", farmerRoutes); // Register the route
 
 // authentication routing
-
 import userRouter from "./routes/auth.routes.js"
 app.use("/api/auth" , userRouter)
 

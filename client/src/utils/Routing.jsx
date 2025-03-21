@@ -23,7 +23,7 @@ const router = createBrowserRouter([
     path: "/farmer-dashboard",
     element: <ProtectedRoute allowedRole="farmer" navbarRole="farmer"/>, // ✅ Correct usage
     children: [
-      { index: true, element: <Farmer /> }, // ✅ Default dashboard view
+      { index: true, element: <Farmer /> }, // ✅ Default dashboard view , farmer dashboard rendered here
       { path: "farmer-onboarding", element: <FarmerOnboarding /> }, // ✅ Nested route
     ],
   },
@@ -33,8 +33,8 @@ const router = createBrowserRouter([
     path: "/contract-farming",
     element: <ProtectedRoute allowedRole="farmer" navbarRole="contractFarming"/>,
     children: [
-      { index: true, element: <ContractFarming /> },
-      { path: "explore-mentor-plans", element: <ExploreMentorPlans/> },
+      { index: true, element:<ExploreMentorPlans/> },
+      
       // { path: "joined-rooms", element: <JoinedRooms /> },
       // { path: "my-meetings", element: <MyMeetings /> },
       // { path: "meeting-calendar", element: <MeetingCalendar /> },
