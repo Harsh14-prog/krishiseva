@@ -3,51 +3,38 @@ import { ApiError } from "../utils/ApiError.js";
 import CreateRoom from "../models/createRoomSchema.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 
-// create room
+// ✅ Create a room
 const createNewRoom = asyncHandler(async (req, res) => {
-    const { roomName, region, cropType, harvestDate, farmingArea, soilType,
-        farmersNeeded, minLandPerFarmer, experienceRequired, seedsRequired,
-        fertilizerPlan, equipmentRequired, yieldPerAcre, sellingPrice, costPerAcre,
-        description, mentorGuidance, investmentRequired, additionalNotes } = req.body;
+    console.log("📩 Incoming Room Creation Request:", req.body); // Log request data
 
-    
-        if ([roomName, harvestDate, farmingArea].some(field => !field || (typeof field === "string" && field.trim() === ""))) {
-            throw new ApiError(400, "Room Name, Harvest Date, and Farming Area are required");
-        }
-        
+    const { roomName, harvestDate, farmingArea } = req.body;
+    if (!roomName || !harvestDate || !farmingArea) {
+        throw new ApiError(400, "Room Name, Harvest Date, and Farming Area are required");
+    }
 
-    
     const existingRoom = await CreateRoom.findOne({ roomName });
     if (existingRoom) {
         throw new ApiError(400, "A room with this name already exists");
     }
 
-    
-    const createdRoom = await CreateRoom.create({
-        roomName, region, cropType, harvestDate, farmingArea, soilType,
-        farmersNeeded, minLandPerFarmer, experienceRequired, seedsRequired,
-        fertilizerPlan, equipmentRequired, yieldPerAcre, sellingPrice, costPerAcre,
-        description, mentorGuidance, investmentRequired, additionalNotes
-    });
+    const createdRoom = await CreateRoom.create(req.body);
+    console.log("✅ Room saved in DB:", createdRoom); // Log saved room
 
-    if (!createdRoom) {
-        throw new ApiError(500, "Something went wrong while creating the room");
-    }
-
-    
     res.status(201).json(new ApiResponse(201, createdRoom, "Room Created Successfully"));
 });
 
-// get all rooms
+// ✅ Fetch all rooms
 const getAllRooms = asyncHandler(async (req, res) => {
-    const rooms = await CreateRoom.find();  // Fetch all rooms
-
+    console.log("📩 Fetching all rooms...");
+    
+    const rooms = await CreateRoom.find();
     if (!rooms || rooms.length === 0) {
+        console.log("❌ No rooms found in DB");
         throw new ApiError(404, "No rooms found");
     }
 
+    console.log("✅ Rooms found:", rooms.length);
     res.status(200).json(new ApiResponse(200, rooms, "All rooms fetched successfully"));
 });
 
-
-export { createNewRoom , getAllRooms }; 
+export { createNewRoom, getAllRooms };

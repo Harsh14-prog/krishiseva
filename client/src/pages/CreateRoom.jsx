@@ -1,21 +1,43 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import React from "react";
 
 const CreateRoom = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const checkProfile = async () => {
+      const userId = localStorage.getItem("userId"); // Get user ID from localStorage
+      try {
+        const response = await axios.get(`http://localhost:8080/api/mentors/check-profile/${userId}`);
+        if (!response.data.exists) {
+          navigate("/mentor-profile"); // Redirect if profile doesn't exist
+        }
+      } catch (error) {
+        console.error("Error checking mentor profile:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    checkProfile();
+  }, [navigate]);
 
   const onSubmit = async (data) => {
     try {
-      await axios.post("/api/rooms/create", data);
+      await axios.post("http://localhost:8080/api/rooms/create", data);
       alert("Room Created Successfully");
-      navigate("/mentor");
+      navigate("/mentor-dashboard");
     } catch (error) {
       console.error("Error creating room", error);
     }
   };
+
+  if (loading) return <h2>Loading...</h2>;
 
   return (
     <div className="min-h-screen w-screen flex flex-col items-center justify-center bg-gray-100 p-6">
@@ -153,18 +175,12 @@ const CreateRoom = () => {
             <input type="number" {...register("investmentRequired")} className="w-full border p-2 rounded" />
           </div>
 
-          {/* Additional Notes */}
-          <div>
-            <label className="block font-medium">Additional Notes</label>
-            <textarea {...register("additionalNotes")} className="w-full border p-2 rounded"></textarea>
-          </div>
-
           {/* Buttons */}
           <div className="flex justify-between mt-4">
             <button type="button" onClick={() => navigate("/mentor")} className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">
               Cancel
             </button>
-            <button  type="submit" className="bg-emerald-600 text-white px-4 py-2 rounded hover:bg-emerald-700">
+            <button type="submit" className="bg-emerald-600 text-white px-4 py-2 rounded hover:bg-emerald-700">
               Create Room
             </button>
           </div>

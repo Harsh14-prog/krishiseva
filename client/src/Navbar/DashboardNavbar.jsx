@@ -15,7 +15,7 @@ import {
   Settings as SettingsIcon,
 } from "@mui/icons-material";
 
-const DashboardNavbar = ({ role, children }) => {
+const DashboardNavbar = ({ role = "mentor", children }) => {
   const [isOpen, setIsOpen] = useState(true);
   const navigate = useNavigate();
 
@@ -23,7 +23,7 @@ const DashboardNavbar = ({ role, children }) => {
 
   const handleLogout = () => {
     localStorage.removeItem("user");
-    window.location.reload(); // Refresh the page after logout
+    window.location.reload();
   };
 
   const menuItems = {
@@ -45,6 +45,11 @@ const DashboardNavbar = ({ role, children }) => {
       { path: "/notifications", label: "Notifications & Alerts", icon: <NotificationsIcon /> },
       { path: "/settings", label: "Settings", icon: <SettingsIcon /> },
     ],
+    mentor: [
+      { path: "/mentor-dashboard", label: "Home", icon: <HomeIcon /> },
+      { path: "/mentor-dashboard/mentor-profile", label: "Mentor Profile", icon: <PersonIcon /> },
+      { path: "/mentor-dashboard/create-room", label: "Create Room", icon: <MeetingRoomIcon /> },
+    ],
   };
 
   return (
@@ -64,26 +69,30 @@ const DashboardNavbar = ({ role, children }) => {
           {menuItems[role]?.map((item, index) => (
             <li
               key={index}
-              className="flex items-center p-2 cursor-pointer hover:bg-green-200 rounded transition-all duration-200"
+              className={`flex items-center p-2 cursor-pointer hover:bg-green-200 rounded transition-all duration-200 ${
+                isOpen ? "justify-start" : "justify-center"
+              }`}
               onClick={() => handleNavigation(item.path)}
             >
               {item.icon}
-              {isOpen && <span className="ml-4">{item.label}</span>}
+              <span className={`ml-4 ${!isOpen && "hidden"}`}>{item.label}</span>
             </li>
           ))}
           {/* Logout Button */}
           <li
-            className="flex items-center cursor-pointer text-red-500 hover:bg-red-200 p-2 rounded transition-all duration-200"
+            className={`flex items-center text-red-500 cursor-pointer hover:bg-red-200 p-2 rounded transition-all duration-200 ${
+              isOpen ? "justify-start" : "justify-center"
+            }`}
             onClick={handleLogout}
           >
             <LogoutIcon />
-            {isOpen && <span className="ml-4">Sign Out</span>}
+            <span className={`ml-4 ${!isOpen && "hidden"}`}>Sign Out</span>
           </li>
         </ul>
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 p-6 overflow-auto ">{children}</div>
+      <div className="flex-1 p-6 overflow-auto">{children}</div>
     </div>
   );
 };

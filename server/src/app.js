@@ -30,6 +30,12 @@ app.use("/api/auth" , userRouter)
 
 // room routes
 import roomRoutes from "./routes/room.routes.js"
-app.use("/api/room" ,roomRoutes )
+app.use("/api/rooms" ,roomRoutes )
+
+// Import mentor routes
+import mentorRoutes from "./routes/mentor.routes.js";
+
+// Register mentor routes
+app.use("/api/mentors", mentorRoutes); // ✅ Now it will work!
 
 export {app}

@@ -8,43 +8,31 @@ import Mentor from "../components/Mentor";
 import Exporter from "../components/Exporter";
 import FarmerOnboarding from "../pages/FarmerOnboarding";
 import ContractFarming from "../components/ContractFarming";
-import ProtectedRoute from "../auth/ProtectedRoutes"; // ✅ Import Protected Route
-import CreateRoom from "../pages/CreateRoom"; // ✅ Import CreateRoom component
+import ProtectedRoute from "../auth/ProtectedRoutes";
+import CreateRoom from "../pages/CreateRoom";
 import ExploreMentorPlans from "../Template/ExploreMentorPlans";
-
+import MentorProfile from "../pages/MentorProfile"; // ✅ Import Mentor Profile Page
 
 const router = createBrowserRouter([
   { path: "/", element: <Home /> },
   { path: "/signup", element: <Signup /> },
   { path: "/login", element: <Login /> },
 
-  // ✅ Farmer Dashboard (Parent Route)
+  // ✅ Farmer Dashboard
   {
     path: "/farmer-dashboard",
-    element: <ProtectedRoute allowedRole="farmer" navbarRole="farmer"/>, // ✅ Correct usage
+    element: <ProtectedRoute allowedRole="farmer" navbarRole="farmer"/>,
     children: [
-      { index: true, element: <Farmer /> }, // ✅ Default dashboard view , farmer dashboard rendered here
-      { path: "farmer-onboarding", element: <FarmerOnboarding /> }, // ✅ Nested route
+      { index: true, element: <Farmer /> },
+      { path: "farmer-onboarding", element: <FarmerOnboarding /> },
     ],
   },
 
-  // ✅ Contract Farming (Separate Dashboard)
+  // ✅ Contract Farming
   {
     path: "/contract-farming",
-    element: <ProtectedRoute allowedRole="farmer" navbarRole="contractFarming"/>,
-    children: [
-      { index: true, element:<ExploreMentorPlans/> },
-      
-      // { path: "joined-rooms", element: <JoinedRooms /> },
-      // { path: "my-meetings", element: <MyMeetings /> },
-      // { path: "meeting-calendar", element: <MeetingCalendar /> },
-      // { path: "meeting-history", element: <MeetingHistory /> },
-      // { path: "request-mentor", element: <RequestMentor /> },
-      // { path: "progress-tracker", element: <ProgressTracker /> },
-      // { path: "set-reminders", element: <SetReminders /> },
-      // { path: "notifications", element: <Notifications /> },
-      // { path: "settings", element: <Settings /> },
-    ],
+    element: <ProtectedRoute allowedRole="farmer" navbarRole="contractFarming"/> ,
+    children: [{ index: true, element: <ExploreMentorPlans /> }],
   },
 
   // ✅ Mentor Dashboard
@@ -52,15 +40,16 @@ const router = createBrowserRouter([
     path: "/mentor-dashboard",
     element: <ProtectedRoute allowedRole="mentor" navbarRole="mentor" />,
     children: [
-      { index: true, element: <Mentor /> }, // ✅ Mentor Dashboard
+      { index: true, element: <Mentor /> },
       { path: "create-room", element: <CreateRoom /> }, // ✅ Create Room Page
+      { path: "mentor-profile", element: <MentorProfile /> }, // ✅ Mentor Profile Page
     ],
   },
 
   // ✅ Exporter Dashboard
   {
     path: "/exporter-dashboard",
-    element: <ProtectedRoute allowedRole="exporter"  navbarRole="exporter"/>,
+    element: <ProtectedRoute allowedRole="exporter" navbarRole="exporter"/>,
     children: [{ index: true, element: <Exporter /> }],
   },
 ]);
